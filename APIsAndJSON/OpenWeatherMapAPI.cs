@@ -11,12 +11,11 @@ namespace APIsAndJSON
     {
         public static string RetrieveTempString(string zipCode)
         {
-            var client = new HttpClient();
             var keyText = File.ReadAllText("appsettings.json");
             var key = JObject.Parse(keyText)["key"].ToString();
             var weatherUrl = $"https://api.openweathermap.org/data/2.5/weather?zip={zipCode}&appid={key}&units=imperial";
 
-            var weatherResponseJson = client.GetStringAsync(weatherUrl).Result;
+            var weatherResponseJson = Program.client.GetStringAsync(weatherUrl).Result;
             return weatherResponseJson;
 
         }
